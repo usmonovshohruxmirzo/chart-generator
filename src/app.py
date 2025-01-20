@@ -54,7 +54,7 @@ update_chart_plots_input.pack(side=tk.LEFT, padx=5)
 update_chart_plots_input_button = tk.Button(update_chart_plots_input_frame, text="Update Plots", command=update_chart_title, font=("Arial", 15))
 update_chart_plots_input_button.pack(side=tk.LEFT)
 
-save_button = ttk.Button(root, text="Save chart", command=save_chart)
+save_button = tk.Button(root, text="Save chart", command=save_chart, font=("Arial", 20))
 save_button.pack()
 
 root.mainloop()
