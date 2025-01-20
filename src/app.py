@@ -33,11 +33,20 @@ def update_chart_title():
 update_chart_title_input_frame = tk.Frame(root)
 update_chart_title_input_frame.pack(pady=10)
 
-update_chart_title_input = tk.Entry(update_chart_title_input_frame)
+update_chart_title_input = ttk.Entry(update_chart_title_input_frame)
 update_chart_title_input.pack(side=tk.LEFT, padx=5)
 
 update_chart_title_input_button = ttk.Button(update_chart_title_input_frame, text="Update Title", command=update_chart_title)
 update_chart_title_input_button.pack(side=tk.LEFT)
+
+update_chart_plots_input_frame = tk.Frame(root)
+update_chart_plots_input_frame.pack(pady=10)
+
+update_chart_plots_input = ttk.Entry(update_chart_plots_input_frame)
+update_chart_plots_input.pack(side=tk.LEFT, padx=5)
+
+update_chart_plots_input_button = ttk.Button(update_chart_plots_input_frame, text="Update Plots", command=update_chart_title)
+update_chart_plots_input_button.pack(side=tk.LEFT)
 
 save_button = ttk.Button(root, text="Save chart", command=save_chart)
 save_button.pack()
