@@ -7,6 +7,12 @@ root = tk.Tk()
 root.geometry("1000x800")
 root.resizable(False, False)
 
+menu = tk.Menu(root)
+root.config(menu=menu)
+file_menu = tk.Menu(menu, tearoff=0)
+file_menu.add_command(label="Exit", command=root.quit)
+menu.add_cascade(label="File", menu=file_menu)
+
 fig, ax = plt.subplots(figsize=(5, 5))
 ax.plot([1, 2, 3, 4], [10, 4, 9, 10])
 ax.set_title("Line Chart")
@@ -33,19 +39,19 @@ def update_chart_title():
 update_chart_title_input_frame = tk.Frame(root)
 update_chart_title_input_frame.pack(pady=10)
 
-update_chart_title_input = ttk.Entry(update_chart_title_input_frame)
+update_chart_title_input = ttk.Entry(update_chart_title_input_frame, width=22, font=("Arial", 20))
 update_chart_title_input.pack(side=tk.LEFT, padx=5)
 
-update_chart_title_input_button = ttk.Button(update_chart_title_input_frame, text="Update Title", command=update_chart_title)
+update_chart_title_input_button = tk.Button(update_chart_title_input_frame, text="Update Title", command=update_chart_title, font=("Arial", 15))
 update_chart_title_input_button.pack(side=tk.LEFT)
 
 update_chart_plots_input_frame = tk.Frame(root)
 update_chart_plots_input_frame.pack(pady=10)
 
-update_chart_plots_input = ttk.Entry(update_chart_plots_input_frame)
+update_chart_plots_input = ttk.Entry(update_chart_plots_input_frame, width=22, font=("Arial", 20))
 update_chart_plots_input.pack(side=tk.LEFT, padx=5)
 
-update_chart_plots_input_button = ttk.Button(update_chart_plots_input_frame, text="Update Plots", command=update_chart_title)
+update_chart_plots_input_button = tk.Button(update_chart_plots_input_frame, text="Update Plots", command=update_chart_title, font=("Arial", 15))
 update_chart_plots_input_button.pack(side=tk.LEFT)
 
 save_button = ttk.Button(root, text="Save chart", command=save_chart)
