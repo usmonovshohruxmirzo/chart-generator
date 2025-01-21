@@ -51,8 +51,10 @@ def update_chart_color():
     canvas.draw()
 
 def update_chart_plots():
-    pass
-
+    plots = [float(x) for x in update_chart_plots_input.get().split(",")]
+    plt.plot(plots)
+    canvas.draw()
+             
 update_chart_title_input_frame = tk.Frame(root)
 update_chart_title_input_frame.pack(pady=10)
 
@@ -82,7 +84,7 @@ update_chart_plots_input.pack(side=tk.LEFT, padx=5)
 update_chart_plots_input_button = tk.Button(
     update_chart_plots_input_frame,
     text="Update Plots",
-    command=update_chart_title,
+    command=update_chart_plots,
     font=("Arial", 14)
 )
 update_chart_plots_input_button.pack(side=tk.LEFT)
