@@ -51,11 +51,15 @@ def update_chart_color():
     canvas.draw()
 
 def update_chart_plots():
-    ax.clear()
-    ax.grid()
-    plots = [float(x) for x in update_chart_plots_input.get().split(",")]
-    plt.plot(plots)
-    canvas.draw()
+    try:
+        ax.clear()
+        ax.grid()
+        plots = [float(x) for x in update_chart_plots_input.get().split(",")]
+        plt.plot(plots)
+        canvas.draw()
+        clear_input_value(update_chart_plots_input)
+    except Exception:
+        messagebox.showerror("Error", "Please add chart plots following example: 1, 2, 3, 4")
              
 update_chart_title_input_frame = tk.Frame(root)
 update_chart_title_input_frame.pack(pady=10)
