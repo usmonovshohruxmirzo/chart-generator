@@ -3,7 +3,10 @@ from tkinter import ttk, messagebox
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 
+app_version = 1.0
+
 root = tk.Tk()
+root.title(f"Chart Generator v{app_version}")
 root.geometry("1000x800")
 root.resizable(False, False)
 
@@ -105,7 +108,7 @@ save_button = tk.Button(
     root, 
     text="Save chart", 
     command=save_chart,
-    font=("Arial", 20)
+    font=("Arial", 14),
 )
 save_button.pack()
 
