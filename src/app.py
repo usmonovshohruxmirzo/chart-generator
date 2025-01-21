@@ -51,6 +51,8 @@ def update_chart_color():
     canvas.draw()
 
 def update_chart_plots():
+    ax.clear()
+    ax.grid()
     plots = [float(x) for x in update_chart_plots_input.get().split(",")]
     plt.plot(plots)
     canvas.draw()
