@@ -33,8 +33,13 @@ canvas.get_tk_widget().pack(pady=20)
 
 def update_chart_title():
     new_title = update_chart_title_input.get()
-    ax.set_title(new_title)
+    if new_title != "":
+        ax.set_title(new_title)
+    clear_input_value(update_chart_title_input)
     canvas.draw()
+
+def clear_input_value(input):
+    input.delete(0, tk.END)
 
 def update_chart_color():
     new_color = update_chart_color_input.get()
