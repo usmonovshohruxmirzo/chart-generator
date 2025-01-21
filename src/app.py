@@ -7,7 +7,7 @@ app_version = 1.0
 
 root = tk.Tk()
 root.title(f"Chart Generator v{app_version}")
-root.geometry("1000x800")
+root.geometry("1200x800")
 root.resizable(False, False)
 
 menu = tk.Menu(root)
@@ -17,9 +17,15 @@ file_menu.add_command(label="Exit", command=root.quit)
 menu.add_cascade(label="File", menu=file_menu)
 
 fig, ax = plt.subplots(figsize=(10, 5))
-ax.plot([1, 2, 3, 4], [10, 4, 9, 10])
+ax.plot([1, 2, 3, 4], [10, 4, 9, 10], marker="o", linestyle="-", color="blue")
 ax.set_title("Line Chart")
-ax.grid()
+ax.set_xlabel("X-axis Label")
+ax.set_ylabel("Y-axis Label")
+ax.grid(color="gray", linestyle=":", linewidth=0.5)
+
+canvas = FigureCanvasTkAgg(fig, master=root)
+canvas.draw()
+canvas.get_tk_widget().pack(pady=20)
 
 prev_button = ttk.Button(root, text="Prev")
 prev_button.pack(side=tk.RIGHT, padx=20)
@@ -31,9 +37,6 @@ def save_chart():
     fig.savefig("chart.png")
     messagebox.showinfo("Message", "Downloaded Successfully!")
 
-canvas = FigureCanvasTkAgg(fig, master=root)
-canvas.draw()
-canvas.get_tk_widget().pack(pady=20)
 
 def update_chart_title():
     new_title = update_chart_title_input.get()
