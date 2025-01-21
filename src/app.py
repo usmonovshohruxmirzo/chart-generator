@@ -13,9 +13,10 @@ file_menu = tk.Menu(menu, tearoff=0)
 file_menu.add_command(label="Exit", command=root.quit)
 menu.add_cascade(label="File", menu=file_menu)
 
-fig, ax = plt.subplots(figsize=(5, 5))
+fig, ax = plt.subplots(figsize=(10, 5))
 ax.plot([1, 2, 3, 4], [10, 4, 9, 10])
 ax.set_title("Line Chart")
+ax.grid()
 
 prev_button = ttk.Button(root, text="Prev")
 prev_button.pack(side=tk.RIGHT, padx=20)
@@ -46,32 +47,66 @@ def update_chart_color():
     plt.plot([1, 2, 3, 4], [10, 4, 9, 10], color=new_color)
     canvas.draw()
 
+def update_chart_plots():
+    pass
+
 update_chart_title_input_frame = tk.Frame(root)
 update_chart_title_input_frame.pack(pady=10)
 
-update_chart_title_input = ttk.Entry(update_chart_title_input_frame, width=22, font=("Arial", 20))
+update_chart_title_input = ttk.Entry(
+    update_chart_title_input_frame, 
+    width=22, 
+    font=("Arial", 20)
+)
 update_chart_title_input.pack(side=tk.LEFT, padx=5)
-update_chart_title_input_button = tk.Button(update_chart_title_input_frame, text="Update Title", command=update_chart_title, font=("Arial", 14))
+update_chart_title_input_button = tk.Button(
+    update_chart_title_input_frame,
+    text="Update Title",
+    command=update_chart_title,
+    font=("Arial", 14)
+)
 update_chart_title_input_button.pack(side=tk.LEFT)
 
 update_chart_plots_input_frame = tk.Frame(root)
 update_chart_plots_input_frame.pack(pady=10)
 
-update_chart_plots_input = ttk.Entry(update_chart_plots_input_frame, width=22, font=("Arial", 20))
+update_chart_plots_input = ttk.Entry(
+    update_chart_plots_input_frame,
+    width=22,
+    font=("Arial", 20)
+)
 update_chart_plots_input.pack(side=tk.LEFT, padx=5)
-update_chart_plots_input_button = tk.Button(update_chart_plots_input_frame, text="Update Plots", command=update_chart_title, font=("Arial", 14))
+update_chart_plots_input_button = tk.Button(
+    update_chart_plots_input_frame,
+    text="Update Plots",
+    command=update_chart_title,
+    font=("Arial", 14)
+)
 update_chart_plots_input_button.pack(side=tk.LEFT)
 
 update_chart_color_input_frame = tk.Frame(root)
 update_chart_color_input_frame.pack(pady=10)
 
-update_chart_color_input = ttk.Entry(update_chart_color_input_frame, width=22, font=("Arial", 20))
+update_chart_color_input = ttk.Entry(
+    update_chart_color_input_frame,
+    width=22,
+    font=("Arial", 20)
+)
 update_chart_color_input.pack(side=tk.LEFT, padx=5)
-update_chart_color_input_button = tk.Button(update_chart_color_input_frame, text="Update color", command=update_chart_color, font=("Arial", 14))
+update_chart_color_input_button = tk.Button(
+    update_chart_color_input_frame,
+    text="Update color", 
+    command=update_chart_color, 
+    font=("Arial", 14)
+)
 update_chart_color_input_button.pack(side=tk.LEFT)
 
-
-save_button = tk.Button(root, text="Save chart", command=save_chart, font=("Arial", 20))
+save_button = tk.Button(
+    root, 
+    text="Save chart", 
+    command=save_chart,
+    font=("Arial", 20)
+)
 save_button.pack()
 
 root.mainloop()
