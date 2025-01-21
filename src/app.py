@@ -47,6 +47,8 @@ def save_chart():
     fig.savefig("chart.png")
     messagebox.showinfo("Message", "Chart saved successfully as 'chart.png'!")
 
+file_menu.add_command(label="Save as PNG", command=save_chart)
+
 def update_chart_title():
     new_title = update_chart_title_input.get()
     if new_title:
@@ -131,13 +133,5 @@ update_chart_color_input_button = tk.Button(
     font=("Arial", 14)
 )
 update_chart_color_input_button.pack(side=tk.LEFT)
-
-save_button = tk.Button(
-    root,
-    text="Save Chart",
-    command=save_chart,
-    font=("Arial", 14)
-)
-save_button.pack(pady=20)
 
 root.mainloop()
