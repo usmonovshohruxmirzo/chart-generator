@@ -18,7 +18,7 @@ file_menu.add_command(label="Exit", command=root.quit)
 menu.add_cascade(label="File", menu=file_menu)
 
 fig, ax = plt.subplots(figsize=(10, 5))
-ax.plot([1, 2, 3, 4], [10, 4, 9, 10], marker="o", linestyle="-", color="blue")
+ax.plot([1, 2, 3, 4], [10, 4, 9, 10], marker="o", linestyle="-", color="skyblue")
 ax.set_title("Line Chart")
 ax.set_xlabel("X-axis Label")
 ax.set_ylabel("Y-axis Label")
@@ -42,6 +42,24 @@ def create_chart(chart_type, x=None, y=None, labels=None, **kwargs):
             ax.set_title("Bar Chart")
             ax.set_xlabel(kwargs.get("xlabel", "Categories"))
             ax.set_ylabel(kwargs.get("ylabel", "Values"))
+        case "scatter":
+            ax.scatter(x, y, color=kwargs.get("color", "blue"), marker=kwargs.get("marker", "o"))
+            ax.set_title("Scatter Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "barh":
+            ax.barh(x, y, color=kwargs.get("color", "skyblue"))
+            ax.set_title("Bar Chart")
+            ax.set_xlabel(kwargs.get("xlabel", "Categories"))
+            ax.set_ylabel(kwargs.get("ylabel", "Values"))
+        case "hist":
+            if x is not None:
+                ax.hist(x, bins=kwargs.get("bins", 10), color=kwargs.get("color", "skyblue"))
+                ax.set_title("Histogram")
+                ax.set_xlabel(kwargs.get("xlabel", "Data"))
+                ax.set_ylabel(kwargs.get("ylabel", "Frequency"))
+            else:
+                messagebox.showwarning("Warning", "Please provide data for the histogram.")
         case _:
             messagebox.showinfo("not found")
 
@@ -88,20 +106,39 @@ chart_types = [
 
 def select_chart_type(event=None):
     selected_option = select_chart.get()
-    if selected_option == "Bar Chart":
-        create_chart(
-            "bar",
-            x=["A", "B", "C", "D"],
-            y=[10, 20, 15, 25],
-        )
-    elif selected_option == "Line Plot":
-        create_chart(
-            "line",
-            x=[1, 2, 3, 4],
-            y=[10, 15, 20, 25],
-        )
-    else:
-        messagebox.showwarning("Warning", f"{selected_option} not implemented yet!")
+    match selected_option:
+        case "Line Plot":
+            create_chart(
+                "line",
+                x=[1, 2, 3, 4],
+                y=[10, 15, 20, 25],
+            ) 
+        case "Bar Chart":
+            create_chart(
+                "bar",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
+        case "Scatter Plot":
+            create_chart(
+                "scatter",
+                x=[1, 2, 3, 4],
+                y=[10, 15, 20, 25],
+            ) 
+        case "Horizontal Bar Chart":
+            create_chart(
+                "barh",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
+        case "Histogram":
+            create_chart(
+                "hist",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
+        case _:
+            messagebox.showwarning("Warning", f"{selected_option} not implemented yet!")
         
 select_chart = ttk.Combobox(root, values=chart_types, width=33)
 select_chart.pack()
