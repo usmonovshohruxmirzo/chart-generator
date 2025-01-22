@@ -30,16 +30,21 @@ canvas.get_tk_widget().pack(pady=20)
 
 def create_chart(chart_type, x=None, y=None, labels=None, **kwargs):
     ax.clear()
-    if chart_type == "line":
-        ax.plot(x, y, color=kwargs.get("color", "blue"), marker=kwargs.get("marker", "o"))
-        ax.set_title("Line Chart")
-        ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
-        ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
-    elif chart_type == "bar":
-        ax.bar(x, y, color=kwargs.get("color", "skyblue"))
-        ax.set_title("Bar Chart")
-        ax.set_xlabel(kwargs.get("xlabel", "Categories"))
-        ax.set_ylabel(kwargs.get("ylabel", "Values"))
+    
+    match chart_type:
+        case "line":
+            ax.plot(x, y, color=kwargs.get("color", "blue"), marker=kwargs.get("marker", "o"))
+            ax.set_title("Line Chart")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "bar":
+            ax.bar(x, y, color=kwargs.get("color", "skyblue"))
+            ax.set_title("Bar Chart")
+            ax.set_xlabel(kwargs.get("xlabel", "Categories"))
+            ax.set_ylabel(kwargs.get("ylabel", "Values"))
+        case _:
+            messagebox.showinfo("not found")
+
     ax.grid(kwargs.get("grid", True))
     canvas.draw()
 
