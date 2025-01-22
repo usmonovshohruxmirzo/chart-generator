@@ -66,9 +66,12 @@ def create_chart(chart_type, x=None, y=None, labels=None, **kwargs):
     ax.grid(kwargs.get("grid", True))
     canvas.draw()
 
+chart_img_num = 0
 def save_chart():
-    fig.savefig("chart.png")
-    messagebox.showinfo("Message", "Chart saved successfully as 'chart.png'!")
+    global chart_img_num
+    chart_img_num += 1
+    fig.savefig(f"./images/chart-{chart_img_num}.png")
+    messagebox.showinfo("Message", "Chart saved successfully as 'chart.png' in /images folder")
 
 file_menu.add_command(label="Save as PNG", command=save_chart)
 
