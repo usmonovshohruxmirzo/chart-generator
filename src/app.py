@@ -136,10 +136,23 @@ def update_chart_plots():
         ax.clear()
         ax.grid()
         plots = [float(x) for x in update_chart_plots_input.get().split(",")]
-        ax.plot(plots, marker="o", color="blue")
-        ax.set_title("Updated Plot")
-        ax.set_xlabel("Index")
-        ax.set_ylabel("Value")
+        selected_option = select_chart.get()
+
+        match selected_option:
+            case "Line Plot":
+                ax.plot(plots, marker="o", color="blue")
+                ax.set_title("Updated Line Plot")
+                ax.set_xlabel("Index")
+                ax.set_ylabel("Value")
+            case "Bar Chart":
+                ax.bar(range(len(plots)), plots, color="blue")
+                ax.set_title("Updated Bar Chart")
+                ax.set_xlabel("Categories")
+                ax.set_ylabel("Values")
+            case _:
+                messagebox.showwarning("Warning", f"{selected_option} updates not supported yet!")
+                return
+
         canvas.draw()
         clear_input_value(update_chart_plots_input)
     except ValueError:
