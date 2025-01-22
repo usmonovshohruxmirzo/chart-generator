@@ -49,6 +49,59 @@ def save_chart():
 
 file_menu.add_command(label="Save as PNG", command=save_chart)
 
+chart_types = [
+    "Line Plot",
+    "Scatter Plot",
+    "Bar Chart",
+    "Horizontal Bar Chart",
+    "Histogram",
+    "Pie Chart",
+    "Stack Plot",
+    "Area Chart",
+    "Box Plot",
+    "Violin Plot",
+    "Stem Plot",
+    "Error Bar Plot",
+    "Quiver Plot",
+    "Stream Plot",
+    "Heatmap",
+    "3D Line Plot",
+    "3D Scatter Plot",
+    "3D Surface Plot",
+    "3D Wireframe Plot",
+    "3D Contour Plot",
+    "3D Bar Chart",
+    "Polar Plot",
+    "Step Plot",
+    "Log-Log Plot",
+    "Semi-Log X Plot",
+    "Semi-Log Y Plot",
+    "Spectrogram",
+    "Arrow Plot",
+    "Custom Shapes"
+]
+
+def select_chart_type(event=None):
+    selected_option = select_chart.get()
+    if selected_option == "Bar Chart":
+        create_chart(
+            "bar",
+            x=["A", "B", "C", "D"],
+            y=[10, 20, 15, 25],
+        )
+    elif selected_option == "Line Plot":
+        create_chart(
+            "line",
+            x=[1, 2, 3, 4],
+            y=[10, 15, 20, 25],
+        )
+    else:
+        messagebox.showwarning("Warning", f"{selected_option} not implemented yet!")
+        
+select_chart = ttk.Combobox(root, values=chart_types, width=33)
+select_chart.pack()
+select_chart.bind("<<ComboboxSelected>>", select_chart_type)
+
 def update_chart_title():
     new_title = update_chart_title_input.get()
     if new_title:
