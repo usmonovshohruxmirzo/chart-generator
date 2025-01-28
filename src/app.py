@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 
 app_version = 1.0
 
@@ -33,7 +32,7 @@ def create_chart(chart_type, x=None, y=None, labels=None, **kwargs):
     
     match chart_type:
         case "line":
-            ax.plot(x, y, color=kwargs.get("color", "blue"), marker=kwargs.get("marker", "o"))
+            ax.plot(x, y, color=kwargs.get("color", "skyblue"), marker=kwargs.get("marker", "o"))
             ax.set_title("Line Chart")
             ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
             ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
@@ -43,7 +42,7 @@ def create_chart(chart_type, x=None, y=None, labels=None, **kwargs):
             ax.set_xlabel(kwargs.get("xlabel", "Categories"))
             ax.set_ylabel(kwargs.get("ylabel", "Values"))
         case "scatter":
-            ax.scatter(x, y, color=kwargs.get("color", "blue"), marker=kwargs.get("marker", "o"))
+            ax.scatter(x, y, color=kwargs.get("color", "skyblue"), marker=kwargs.get("marker", "o"))
             ax.set_title("Scatter Plot")
             ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
             ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
@@ -226,7 +225,7 @@ def select_chart_type(event=None):
             create_chart(
                 "line",
                 x=[1, 2, 3, 4],
-                y=[10, 15, 20, 25],
+                y=[10, 4, 9, 10],
             ) 
         case "Bar Chart":
             create_chart(
@@ -401,6 +400,7 @@ def select_chart_type(event=None):
         
 select_chart = ttk.Combobox(root, values=chart_types, width=33)
 select_chart.pack()
+select_chart.set(chart_types[0])
 select_chart.bind("<<ComboboxSelected>>", select_chart_type)
 
 def update_chart_title():
