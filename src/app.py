@@ -140,6 +140,50 @@ def select_chart_type(event=None):
                 x=["A", "B", "C", "D"],
                 y=[10, 20, 15, 25],
             )
+        case "Stack Plot":
+            pass
+        case "Area Chart":
+            pass
+        case "Box Plot":
+            pass
+        case "Violin Plot":
+            pass
+        case "Stem Plot":
+            pass
+        case "Error Bar Plot":
+            pass
+        case "Quiver Plot":
+            pass
+        case "Stream Plot":
+            pass
+        case "Heatmap":
+            pass
+        case "3D Line Plot":
+            pass
+        case "3D Scatter Plot":
+            pass
+        case "3D Surface Plot":
+            pass
+        case "3D Wireframe Plot":
+            pass
+        case "3D Contour Plot":
+            pass
+        case "3D Bar Chart":
+            pass
+        case "Polar Plot":
+            pass
+        case "Step Plot":
+            pass
+        case "Log-Log Plot":
+            pass
+        case "Semi-Log X Plot":
+            pass
+        case "Semi-Log Y Plot":
+            pass
+        case "Spectrogram":
+            pass
+        case "Arrow Plot":
+            pass
         case _:
             messagebox.showwarning("Warning", f"{selected_option} not implemented yet!")
         
