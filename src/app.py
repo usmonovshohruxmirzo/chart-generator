@@ -60,53 +60,122 @@ def create_chart(chart_type, x=None, y=None, labels=None, **kwargs):
                 ax.set_ylabel(kwargs.get("ylabel", "Frequency"))
             else:
                 messagebox.showwarning("Warning", "Please provide data for the histogram.")
+        case "pie":
+            if labels and y:
+                ax.pie(y, labels=labels, autopct=kwargs.get("autopct", "%.1f%%"), colors=kwargs.get("colors", None))
+                ax.set_title("Pie Chart")
+            else:
+                messagebox.showwarning("Warning", "Please provide both labels and data for the pie chart.")
         case "stackplot":
             ax.stackplot(x, y, color=kwargs.get("color", "skyblue"))
             ax.set_title("Stack Plot")
             ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
             ax.set_ylabel(kwargs.get("ylabel", "Values"))
-        case "Area Chart":
-            pass
-        case "Box Plot":
-            pass
-        case "Violin Plot":
-            pass
-        case "Stem Plot":
-            pass
-        case "Error Bar Plot":
-            pass
-        case "Quiver Plot":
-            pass
-        case "Stream Plot":
-            pass
-        case "Heatmap":
-            pass
-        case "3D Line Plot":
-            pass
-        case "3D Scatter Plot":
-            pass
-        case "3D Surface Plot":
-            pass
-        case "3D Wireframe Plot":
-            pass
-        case "3D Contour Plot":
-            pass
-        case "3D Bar Chart":
-            pass
-        case "Polar Plot":
-            pass
-        case "Step Plot":
-            pass
-        case "Log-Log Plot":
-            pass
-        case "Semi-Log X Plot":
-            pass
-        case "Semi-Log Y Plot":
-            pass
-        case "Spectrogram":
-            pass
-        case "Arrow Plot":
-            pass
+        case "area_chart":
+            ax.fill_between(x, y, color=kwargs.get("color", "skyblue"))
+            ax.set_title("Area Chart")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Values"))
+        case "boxplot":
+            ax.boxplot(y, vert=False, patch_artist=True, boxprops=dict(facecolor=kwargs.get("color", "skyblue")))
+            ax.set_title("Box Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "Categories"))
+            ax.set_ylabel(kwargs.get("ylabel", "Values"))
+        case "violinplot":
+            ax.violinplot(y)
+            ax.set_title("Violin Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "Categories"))
+            ax.set_ylabel(kwargs.get("ylabel", "Values"))
+        case "stem":
+            ax.stem(x, y, basefmt=" ", linefmt=kwargs.get("color", "blue"), markerfmt=kwargs.get("marker", "o"))
+            ax.set_title("Stem Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "errorbar":
+            ax.errorbar(x, y, yerr=kwargs.get("yerr", 0.1), fmt=kwargs.get("marker", "o"), color=kwargs.get("color", "skyblue"))
+            ax.set_title("Error Bar Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "quiver":
+            ax.quiver(x, y, u=kwargs.get("u", [0]*len(x)), v=kwargs.get("v", [0]*len(y)))
+            ax.set_title("Quiver Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "streamplot":
+            ax.streamplot(x, y, color=kwargs.get("color", "blue"))
+            ax.set_title("Stream Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "imshow":
+            ax.imshow(y, cmap=kwargs.get("color", "viridis"))
+            ax.set_title("Heatmap")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "3d_line_plot":
+            ax.plot(x, y, zs=kwargs.get("z", 0), zdir="z", label=kwargs.get("label", "3D Line"))
+            ax.set_title("3D Line Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "3d_scatter_plot":
+            ax.scatter(x, y, zs=kwargs.get("z", 0), zdir="z", label=kwargs.get("label", "3D Scatter"))
+            ax.set_title("3D Scatter Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "3d_surface_plot":
+            ax.plot_surface(x, y, z=kwargs.get("z", [[0]*len(x)]*len(y)), cmap=kwargs.get("color", "viridis"))
+            ax.set_title("3D Surface Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "3d_wireframe_plot":
+            ax.plot_wireframe(x, y, z=kwargs.get("z", [[0]*len(x)]*len(y)), cmap=kwargs.get("color", "viridis"))
+            ax.set_title("3D Wireframe Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "3d_contour_plot":
+            ax.contour3D(x, y, z=kwargs.get("z", [[0]*len(x)]*len(y)), cmap=kwargs.get("color", "viridis"))
+            ax.set_title("3D Contour Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "3d_bar_chart":
+            ax.bar3d(x, y, kwargs.get("z", [0]*len(x)), color=kwargs.get("color", "blue"))
+            ax.set_title("3D Bar Chart")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "polar_plot":
+            ax.plot(x, y, color=kwargs.get("color", "blue"))
+            ax.set_title("Polar Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "Angle"))
+            ax.set_ylabel(kwargs.get("ylabel", "Radius"))
+        case "step_plot":
+            ax.step(x, y, where="mid", color=kwargs.get("color", "blue"))
+            ax.set_title("Step Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "log-log_plot":
+            ax.loglog(x, y, color=kwargs.get("color", "blue"))
+            ax.set_title("Log-Log Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "semi-log_x_plot":
+            ax.semilogx(x, y, color=kwargs.get("color", "blue"))
+            ax.set_title("Semi-Log X Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "semi-log_y_plot":
+            ax.semilogy(x, y, color=kwargs.get("color", "blue"))
+            ax.set_title("Semi-Log Y Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
+        case "spectrogram":
+            ax.specgram(y, NFFT=kwargs.get("NFFT", 256), Fs=kwargs.get("Fs", 1))
+            ax.set_title("Spectrogram")
+            ax.set_xlabel(kwargs.get("xlabel", "Frequency"))
+            ax.set_ylabel(kwargs.get("ylabel", "Amplitude"))
+        case "arrow_plot":
+            ax.quiver(x, y, angles="xy", scale_units="xy", scale=1)
+            ax.set_title("Arrow Plot")
+            ax.set_xlabel(kwargs.get("xlabel", "X-axis"))
+            ax.set_ylabel(kwargs.get("ylabel", "Y-axis"))
         case _:
             messagebox.showinfo("not found")
 
@@ -151,7 +220,6 @@ chart_types = [
     "Semi-Log Y Plot",
     "Spectrogram",
     "Arrow Plot",
-    "Custom Shapes"
 ]
 
 def select_chart_type(event=None):
@@ -187,6 +255,13 @@ def select_chart_type(event=None):
                 x=["A", "B", "C", "D"],
                 y=[10, 20, 15, 25],
             )
+        case "Pie Chart":
+            create_chart(
+                "pie",
+                y=[10, 20, 15, 25],
+                labels=["A", "B", "C", "D"],
+                colors=["red", "green", "blue", "yellow"]
+            )
         case "Stack Plot":
             create_chart(
                 "stackplot",
@@ -194,47 +269,136 @@ def select_chart_type(event=None):
                 y=[10, 20, 15, 25],
             )
         case "Area Chart":
-            pass
+            create_chart(
+                "area_chart",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
         case "Box Plot":
-            pass
+            create_chart(
+                "boxplot",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
         case "Violin Plot":
-            pass
+            create_chart(
+                "violinplot",
+                y=[10, 20, 15, 25],
+            )
         case "Stem Plot":
-            pass
+            create_chart(
+                "stem",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
         case "Error Bar Plot":
-            pass
+            create_chart(
+                "errorbar",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
         case "Quiver Plot":
-            pass
+            create_chart(
+                "quiver",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
         case "Stream Plot":
-            pass
+            create_chart(
+                "streamplot",
+                x=[1, 2, 3, 4],
+                y=[10, 15, 20, 25],
+            )
         case "Heatmap":
-            pass
+            create_chart(
+                "imshow",
+                x=[1, 2, 3, 4],
+                y=[[10, 20, 30, 40], [50, 60, 70, 80], [90, 100, 110, 120], [130, 140, 150, 160]],
+            )
         case "3D Line Plot":
-            pass
+            create_chart(
+                "3d_line_plot",
+                x=["A", "B", "C", "D"],
+                y=[10, 20, 15, 25],
+            )
         case "3D Scatter Plot":
-            pass
+            create_chart(
+                "3d_scatter_plot",
+                x=[1, 2, 3, 4],
+                y=[10, 15, 20, 25],
+                z=[5, 10, 15, 20]
+            )
         case "3D Surface Plot":
-            pass
+            create_chart(
+                "3d_surface_plot",
+                x=[[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+                y=[[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+                z=[[10, 20, 30], [40, 50, 60], [70, 80, 90]],
+            )
         case "3D Wireframe Plot":
-            pass
+            create_chart(
+                "3d_wireframe_plot",
+                x=[[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+                y=[[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+                z=[[10, 20, 30], [40, 50, 60], [70, 80, 90]],
+            )
         case "3D Contour Plot":
-            pass
+            create_chart(
+                "3d_contour_plot",
+                x=[1, 2, 3],
+                y=[1, 2, 3],
+                z=[[10, 20, 30], [40, 50, 60], [70, 80, 90]],
+            )
         case "3D Bar Chart":
-            pass
+            create_chart(
+                "3d_bar_chart",
+                x=[1, 2, 3],
+                y=[10, 20, 30],
+                z=[5, 10, 15],
+            )
         case "Polar Plot":
-            pass
+            create_chart(
+                "polar_plot",
+                x=[0, 30, 60, 90],
+                y=[1, 2, 3, 4],
+            )
         case "Step Plot":
-            pass
+            create_chart(
+                "step_plot",
+                x=[1, 2, 3, 4],
+                y=[10, 20, 30, 40],
+            )
         case "Log-Log Plot":
-            pass
+            create_chart(
+                "log-log_plot",
+                x=[1, 2, 3, 4],
+                y=[10, 100, 1000, 10000],
+            )
         case "Semi-Log X Plot":
-            pass
+            create_chart(
+                "semi-log_x_plot",
+                x=[1, 2, 3, 4],
+                y=[10, 100, 1000, 10000],
+            )
         case "Semi-Log Y Plot":
-            pass
+            create_chart(
+                "semi-log_y_plot",
+                x=[1, 2, 3, 4],
+                y=[10, 100, 1000, 10000],
+            )
         case "Spectrogram":
-            pass
+            create_chart(
+                "spectrogram",
+                y=[10, 20, 30, 40, 50],
+                NFFT=128,
+                Fs=10,
+            )
         case "Arrow Plot":
-            pass
+            create_chart(
+                "arrow_plot",
+                x=[1, 2, 3, 4],
+                y=[10, 15, 20, 25],
+            )
         case _:
             messagebox.showwarning("Warning", f"{selected_option} not implemented yet!")
         
